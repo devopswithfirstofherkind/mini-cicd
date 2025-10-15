@@ -12,6 +12,8 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
 
             - name: Build Image
               run: npm install
@@ -23,8 +25,14 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
 
             - name: Test 
               run: npm test
+
+            - name: Notify Test Failure
+              if: failure()
+              run: "echo 'This build failed, check logs' "
 
 
